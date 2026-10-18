@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <title>Mi Garage | Bitácora automotriz</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+        <a href="#inicio" class="brand">
+            <span class="brand-mark">MG</span>
+            <span>
+                <strong>MI GARAGE</strong>
+                <small>BITACORA AUTOMOTRIZ</small>
+            </span>
+        </a>
+
+        <p class="sidebar-label">MENU PRINCIPAL</p>
+
+        <nav class="navigation">
+            <button class="nav-link active" data-view="inicio">
+                <span>▦</span> Panel principal
+            </button>
+            <button class="nav-link" data-view="vehiculos">
+                <span>🚘</span> Mis vehiculos
+            </button>
+            <button class="nav-link" data-view="rendimiento">
+                <span>⌁</span> Rendimiento
+            </button>
+            <button class="nav-link" data-view="bitacora">
+                <span>▤</span> Bitacora
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="storage-note">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>Modo de demostracion</strong>
+                    <small>Datos guardados en este navegador</small>
+                </div>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">AX</div>
+                <div>
+                    <strong>Mi perfil</strong>
+                    <small>Propietario del garaje</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button class="mobile-menu" id="mobile-menu">☰</button>
+
+            <div class="breadcrumb">
+                <span>Mi Garage</span>
+                <span>/</span>
+                <strong id="breadcrumb-current">Panel principal</strong>
+            </div>
+
+            <button class="button button-primary button-small"
+                    data-action="new-vehicle">
+                + Agregar vehiculo
+            </button>
+        </header>
+
+        <!-- PANEL PRINCIPAL -->
+        <section class="view active" id="view-inicio">
+
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">TU ESPACIO AUTOMOTRIZ</p>
+                    <h1>Panel principal</h1>
+                    <p class="page-description">
+                        Toda la informacion de tus vehiculos en un solo lugar.
+                    </p>
+                </div>
+                <span class="date-chip" id="today-date"></span>
+            </div>
+
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Vehiculos registrados</span>
+                    <strong id="stat-vehicles">0</strong>
+                    <small>En tu garaje</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Registros de bitacora</span>
+                    <strong id="stat-records">0</strong>
+                    <small>Mantenimientos y reparaciones</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Modificaciones</span>
+                    <strong id="stat-mods">0</strong>
+                    <small>Registradas en tus vehiculos</small>
+                </article>
+
+                <article class="stat-card">
+                    <span>Gastos registrados</span>
+                    <strong id="stat-cost">$0.00</strong>
+                    <small>Total de gastos anotados</small>
+                </article>
+            </div>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Mi garaje</h2>
+                        <p>Tus vehiculos registrados recientemente.</p>
+                    </div>
+                    <button class="text-button" data-view="vehiculos">
+                        Ver todos →
+                    </button>
+                </div>
+
+                <div class="vehicle-grid" id="dashboard-vehicles"></div>
+
+                <div class="empty-state" id="dashboard-empty">
+                    <div class="empty-icon">🚘</div>
+                    <h3>Tu garaje comienza aqui</h3>
+                    <p>Agrega tu primer vehiculo y crea su ficha tecnica.</p>
+                    <button class="button button-primary" data-action="new-vehicle">
+                        + Agregar vehiculo
+                    </button>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Actividad reciente</h2>
+                        <p>Ultimos registros de tu bitacora.</p>
+                    </div>
+                </div>
+
+                <div id="recent-activity"></div>
+
+                <div class="empty-state compact" id="activity-empty">
+                    <p>Todavia no hay actividad registrada.</p>
+                </div>
+
+                <button class="button button-secondary full-width" data-view="bitacora">
+                    Abrir bitacora
+                </button>
+            </section>
+
+        </section>
+
+        <!-- VEHICULOS -->
+        <section class="view" id="view-vehiculos">
+
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">TU COLECCION</p>
+                    <h1>Mis vehiculos</h1>
+                    <p class="page-description">
+                        Administra las fichas y fotografias de tus carros.
+                    </p>
+                </div>
+
+                <button class="button button-primary" data-action="new-vehicle">
+                    + Agregar vehiculo
+                </button>
+            </div>
+
+            <input class="search-input" id="vehicle-search"
+                   type="search"
+                   placeholder="Buscar por marca, modelo o año...">
+
+            <div class="vehicle-grid vehicle-grid-page" id="all-vehicles"></div>
+
+            <div class="empty-state" id="vehicles-empty">
+                <div class="empty-icon">🚘</div>
+                <h3>No hay vehiculos todavia</h3>
+                <p>Registra un vehiculo para comenzar.</p>
+                <button class="button button-primary" data-action="new-vehicle">
+                    + Registrar vehiculo
+                </button>
+            </div>
+        </section>
+
+        <!-- RENDIMIENTO -->
+        <section class="view" id="view-rendimiento">
+
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">DATOS DEL MOTOR</p>
+                    <h1>Rendimiento</h1>
+                    <p class="page-description">
+                        Compara las cifras de fabrica con las modificadas.
+                    </p>
+                </div>
+
+                <button class="button button-primary" data-action="new-performance">
+                    + Añadir rendimiento
+                </button>
+            </div>
+
+            <label class="field">
+                Seleccionar vehiculo
+                <select id="performance-vehicle">
+                    <option value="">Selecciona un vehiculo</option>
+                </select>
+            </label>
+
+            <div id="performance-content"></div>
+
+            <div class="empty-state" id="performance-empty">
+                <div class="empty-icon">⌁</div>
+                <h3>Registra el rendimiento</h3>
+                <p>
+                    Guarda la potencia maxima, las RPM y el torque de tu motor.
+                </p>
+                <button class="button button-primary" data-action="new-performance">
+                    + Añadir rendimiento
+                </button>
+            </div>
+        </section>
+
+        <!-- BITACORA -->
+        <section class="view" id="view-bitacora">
+
+            <div class="page-heading">
+                <div>
+                    <p class="eyebrow">HISTORIAL COMPLETO</p>
+                    <h1>Bitacora</h1>
+                    <p class="page-description">
+                        Mantenimientos, reparaciones y modificaciones.
+                    </p>
+                </div>
+
+                <button class="button button-primary" data-action="new-record">
+                    + Nuevo registro
+                </button>
+            </div>
+
+            <input class="search-input" id="record-search"
+                   type="search"
+                   placeholder="Buscar en la bitacora...">
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Registro</th>
+                            <th>Vehiculo</th>
+                            <th>Fecha</th>
+                            <th>Kilometraje</th>
+                            <th>Costo</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="records-table"></tbody>
+                </table>
+
+                <div class="empty-state compact" id="records-empty">
+                    <h3>Tu bitacora esta vacia</h3>
+                    <p>Los registros apareceran aqui cuando los agregues.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>MI GARAGE · BITACORA AUTOMOTRIZ</span>
+            <span>Prototipo de desarrollo</span>
+        </footer>
+
+    </main>
+</div>
+
+<!-- VENTANA PARA FORMULARIOS -->
+<div class="modal-backdrop" id="modal-backdrop">
+    <section class="modal">
+        <div class="modal-header">
+            <div>
+                <p class="eyebrow">MI GARAGE</p>
+                <h2 id="modal-title">Nuevo registro</h2>
+            </div>
+            <button class="icon-button" id="modal-close">✕</button>
+        </div>
+
+        <!-- FORMULARIO DE VEHICULO -->
+        <form id="vehicle-form" class="modal-form hidden">
+
+            <label class="photo-upload">
+                Fotografia personalizada
+                <input type="file" id="vehicle-photo"
+                       accept="image/png,image/jpeg,image/webp">
+                <span id="photo-preview">Vista previa de la foto</span>
+            </label>
+
+            <div class="form-grid">
+                <label>Marca *
+                    <input name="marca" required placeholder="Lamborghini">
+                </label>
+
+                <label>Modelo *
+                    <input name="modelo" required placeholder="Huracan">
+                </label>
+
+                <label>Año
+                    <input name="anio" type="number" min="1886" max="2100">
+                </label>
+
+                <label>Placa
+                    <input name="placa" placeholder="Numero de placa">
+                </label>
+
+                <label>Motor
+                    <input name="motor" placeholder="V10 5.2 L">
+                </label>
+
+                <label>Transmision
+                    <input name="transmision" placeholder="Automatica">
+                </label>
+
+                <label class="full-field">Kilometraje actual
+                    <input name="kilometraje" type="number" min="0" value="0">
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="button button-secondary" data-close>
+                    Cancelar
+                </button>
+                <button type="submit" class="button button-primary">
+                    Guardar vehiculo
+                </button>
+            </div>
+        </form>
+
+        <!-- FORMULARIO DE RENDIMIENTO -->
+        <form id="performance-form" class="modal-form hidden">
+
+            <label>Vehiculo *
+                <select name="vehiculoId" required></select>
+            </label>
+
+            <label>Tipo de rendimiento *
+                <select name="tipo" required>
+                    <option value="fabrica">De fabrica</option>
+                    <option value="modificado">Modificado o medido</option>
+                </select>
+            </label>
+
+            <h3>Potencia maxima</h3>
+
+            <div class="form-grid">
+                <label>Potencia (hp)
+                    <input name="potencia" type="number" min="0" step="0.01">
+                </label>
+
+                <label>RPM minima
+                    <input name="potenciaRpmMin" type="number" min="0">
+                </label>
+
+                <label>RPM maxima
+                    <input name="potenciaRpmMax" type="number" min="0">
+                </label>
+            </div>
+
+            <h3>Torque maximo</h3>
+
+            <div class="form-grid">
+                <label>Torque (Nm)
+                    <input name="torque" type="number" min="0" step="0.01">
+                </label>
+
+                <label>RPM minima
+                    <input name="torqueRpmMin" type="number" min="0">
+                </label>
+
+                <label>RPM maxima
+                    <input name="torqueRpmMax" type="number" min="0">
+                </label>
+            </div>
+
+            <label>Fuente de los datos
+                <select name="fuente">
+                    <option>Ficha tecnica</option>
+                    <option>Banco de potencia</option>
+                    <option>Estimacion</option>
+                    <option>Otra</option>
+                </select>
+            </label>
+
+            <label>Notas
+                <textarea name="notas" rows="3"
+                    placeholder="Modificaciones o condiciones de medicion"></textarea>
+            </label>
+
+            <div class="modal-actions">
+                <button type="button" class="button button-secondary" data-close>
+                    Cancelar
+                </button>
+                <button type="submit" class="button button-primary">
+                    Guardar rendimiento
+                </button>
+            </div>
+        </form>
+
+        <!-- FORMULARIO DE BITACORA -->
+        <form id="record-form" class="modal-form hidden">
+
+            <label>Vehiculo *
+                <select name="vehiculoId" required></select>
+            </label>
+
+            <label>Tipo de registro *
+                <select name="tipo" required>
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="reparacion">Reparacion</option>
+                    <option value="modificacion">Modificacion</option>
+                    <option value="reprogramacion">Reprogramacion</option>
+                    <option value="nota">Nota</option>
+                </select>
+            </label>
+
+            <label>Titulo *
+                <input name="titulo" required
+                       placeholder="Cambio de aceite y filtros">
+            </label>
+
+            <div class="form-grid">
+                <label>Fecha *
+                    <input name="fecha" type="date" required>
+                </label>
+
+                <label>Kilometraje
+                    <input name="kilometraje" type="number" min="0">
+                </label>
+
+                <label class="full-field">Costo en dolares
+                    <input name="costo" type="number" min="0" step="0.01">
+                </label>
+            </div>
+
+            <label>Descripcion
+                <textarea name="descripcion" rows="3"
+                    placeholder="Detalles del servicio o reparacion"></textarea>
+            </label>
+
+            <div class="modal-actions">
+                <button type="button" class="button button-secondary" data-close>
+                    Cancelar
+                </button>
+                <button type="submit" class="button button-primary">
+                    Guardar registro
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+    <script src="./JS/app.js" defer></script>
+
+</body>
+</html>
